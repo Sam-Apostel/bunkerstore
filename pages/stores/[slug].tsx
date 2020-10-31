@@ -23,8 +23,20 @@ const Store = ({ store, moreStores, preview }: Props) => {
     if (!router.isFallback && !store?.slug) {
         return <ErrorPage statusCode={404} />
     }
+    const alert = preview ? (
+        <>
+            This page is a preview.{' '}
+            <a
+                href="/api/exit-preview"
+                className="underline hover:text-cyan duration-200 transition-colors"
+            >
+                Click here
+            </a>{' '}
+            to exit preview mode.
+        </>
+    ) : null;
     return (
-        <Layout preview={preview}>
+        <Layout alert={alert}>
             <Container>
                 <Header store={store} />
                 {router.isFallback ? (
